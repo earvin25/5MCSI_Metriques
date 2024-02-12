@@ -34,28 +34,6 @@ def mongraphique():
 @app.route("/histogramme/")
 def monhistogramme():
     return render_template("histogramme.html")
-
-def extract_minutes(date_string):
-    date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
-    minutes = date_object.minute
-    return minutes
-
-@app.route('/commits/')
-def commits():
-    repo_url = "https://github.com/earvin25/5MCSI_Metriques"
-    response = requests.get(repo_url)
-    commits_data = response.json()
-
-    minutes_data = [extract_minutes(commit['commit']['author']['date']) for commit in commits_data]
-
-    # Générer le graphique
-    plt.plot(minutes_data)
-    plt.title('Commits par minute')
-    plt.xlabel('Commits')
-    plt.ylabel('Minutes')
-    plt.savefig('static/commits_graph.png')  # Sauvegarder le graphique en tant que fichier image
-
-    return render_template('commits.html', graph_url='/static/commits_graph.png')
   
 @app.route("/commits/")
 def commits():
