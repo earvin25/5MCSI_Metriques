@@ -56,9 +56,6 @@ def commits():
     plt.savefig('static/commits_graph.png')  # Sauvegarder le graphique en tant que fichier image
 
     return render_template('commits.html', graph_url='/static/commits_graph.png')
-
-if __name__ == '__main__':
-  
   
 @app.route("/commits/")
 def commits():
